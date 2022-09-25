@@ -1,0 +1,9 @@
+- name: Ensure ZSH is present and configured
+  hosts: "ubuntu"
+  become: true
+  tasks:
+    - name: Ensure ZSH is present
+      apt:
+        name: zsh
+        state: present
+        update_cache: yes

@@ -1,0 +1,20 @@
+---
+- hosts: all
+  name: Making sure software is present and updated in the machine
+  become: true
+  tasks:
+    - name: prequisites
+      apt:
+        name:
+          - curl
+        state: present
+        update_cache: yes
+    - name: NCDU | NALA
+      apt:
+        name:
+        - ncdu
+        - nala
+        state: latest
+        cache_valid_time: 3600
+    - name: MICRO
+      shell: "curl https://getmic.ro | bash"

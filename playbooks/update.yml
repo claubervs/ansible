@@ -1,0 +1,8 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: Ensure Distro is updated
+    apt:
+      update_cache: yes
+      upgrade: 'yes'
+      cache_valid_time: 3600

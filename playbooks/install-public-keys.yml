@@ -1,0 +1,9 @@
+---
+- hosts: ubuntu
+  become: true
+  tasks:
+    - name: install public keys
+      ansible.posix.authorized_key:
+        user: clauber
+        state: present
+        key: "{{ lookup('file', '~/.ssh/clauber_rsa.pub') }}"
