@@ -9,12 +9,18 @@
           - curl
         state: present
         update_cache: yes
-    - name: NCDU | NALA
+    - name: Ensure NCDU is present
       apt:
-        name:
-        - ncdu
-        - nala
-        state: latest
+        name: ncdu
+        state: present
         cache_valid_time: 3600
+    - name: Ensure NALA is present (Ubuntu >= 22)
+      apt:
+        name: nala
+      when:
+        - ansible_facts['ansible_distribution'] == "Ubuntu"
+        - ansible_facts['ansible_distribution_version'] >= "22"
+    - name: Ensure NALA is present (Ubuntu < 22)
+      msg: "TBD"
     - name: MICRO
       shell: "curl https://getmic.ro | bash"
