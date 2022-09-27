@@ -18,9 +18,8 @@
       apt:
         name: nala
       when:
-        - ansible_facts['ansible_distribution'] == "Ubuntu"
-        - ansible_facts['ansible_distribution_version'] >= "22"
-    - name: Ensure NALA is present (Ubuntu < 22)
-      msg: "TBD"
+        - ansible_facts['distribution_major_version'] is version('22', '>=')
+    # - name: Ensure NALA is present (Ubuntu < 22)
+      # msg: "TBD"
     - name: MICRO
       shell: "curl https://getmic.ro | bash"
