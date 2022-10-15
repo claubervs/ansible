@@ -3,6 +3,7 @@
   become: true
   tasks:
     - name: Ensure ZSH is present
+      tags: zsh,ubuntu
       apt:
         name: zsh
         state: present

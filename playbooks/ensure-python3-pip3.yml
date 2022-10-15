@@ -4,11 +4,13 @@
   become: yes
   tasks:
   - name: Ensure python3 is present
+    tags: python
     apt:
       name: python3
       state: present
       update_cache: yes
   - name: Ensure pip3 is present
+    tags: pip, python
     apt:
       name: python3-pip
       state: present

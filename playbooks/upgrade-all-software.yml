@@ -5,6 +5,7 @@
 
   tasks:
     - name: Ensuring all installed packages are up to date
+    tags: all
       apt:
         name: "*"
         update_cache: yes

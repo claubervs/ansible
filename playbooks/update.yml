@@ -2,6 +2,7 @@
   become: yes
   tasks:
   - name: Ensure Distro is updated
+    tags: all
     apt:
       update_cache: yes
       upgrade: 'yes'

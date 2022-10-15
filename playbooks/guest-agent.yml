@@ -2,6 +2,7 @@
 - hosts: all
   tasks:
     - name: Ensure qemu-guest-agent is present
+      tags: guestagent
       apt:
         name: qemu-guest-agent
         state: present

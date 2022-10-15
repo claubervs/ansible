@@ -2,7 +2,8 @@
 - hosts: ubuntu
   become: true
   tasks:
-    - name: install public keys
+    - name: Install public keys
+      tags: sshkey
       ansible.posix.authorized_key:
         user: clauber
         state: present
