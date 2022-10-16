@@ -2,14 +2,18 @@
 - hosts: all
   name: make sure required software is present in the machine
   become: true
-  tasks:
-    - name: prequisites
+
+  pre_tasks:
+    - name: make sure required software is installed is installed
       apt:
         name:
           - curl
         state: present
         update_cache: yes
+        cache_valid_time: 3600
 
+
+  tasks:
     - name: Ensure NCDU is present
       apt:
         name: ncdu
@@ -24,6 +28,18 @@
     # - name: Ensure NALA is present (Ubuntu < 22)
       # msg: "TBD"
 
-      
-    - name: MICRO
-      shell: "curl https://getmic.ro | bash"
+    - name: Ensure MICRO is present (Ubuntu)
+      apt:
+        name: micro
+      when: ansible_distribution == "Ubuntu"
+
+    # - name: Make sure MICRO is present and universal
+    #   stat:
+    #     path: "/usr/bin/micro"
+    #   register: microtest
+    
+    # - name: Install MICRO
+    #   shell: |
+    #     "cd /usr/bin"
+    #     "sudo curl https://getmic.ro | bash"
+    #   when: microtest.stat.exists is not defined
