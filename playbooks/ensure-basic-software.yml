@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  name: Making sure software is present and updated in the machine
+  name: make sure required software is present in the machine
   become: true
   tasks:
     - name: prequisites
@@ -9,11 +9,13 @@
           - curl
         state: present
         update_cache: yes
+
     - name: Ensure NCDU is present
       apt:
         name: ncdu
         state: present
         cache_valid_time: 3600
+        
     - name: Ensure NALA is present (Ubuntu >= 22)
       apt:
         name: nala
@@ -21,5 +23,7 @@
         - ansible_facts['distribution_major_version'] is version('22', '>=')
     # - name: Ensure NALA is present (Ubuntu < 22)
       # msg: "TBD"
+
+      
     - name: MICRO
       shell: "curl https://getmic.ro | bash"

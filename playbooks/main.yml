@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+
+
+  - name: update repo index (Ubuntu)
+    tags: always
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+    changed_when: false
+    when: ansible_distribution == "Ubuntu"
+
+
+- hosts: all
+  become: true
+  roles:
+    - base
+
+
+- hosts: all
+  become: true
+  roles:
+    - base_apps
+
