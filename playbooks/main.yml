@@ -17,10 +17,6 @@
   become: true
   roles:
     - base
-
-
-- hosts: all
-  become: true
-  roles:
     - base_apps
-
+    # - zsh
+    - chezmoi

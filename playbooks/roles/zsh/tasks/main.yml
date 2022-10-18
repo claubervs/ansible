@@ -1,0 +1,19 @@
+- name: ensure zsh is present
+  apt:
+    - 
+
+
+- name: ensure oh-my-zsh is present
+
+
+- name: ensure powerlevel10k is present
+
+
+- name: ensure personal .bash_aliases is present
+
+
+
+- name: ensure personal .zshrc is present
+
+
+- name: ensure personal .p10k.zsh is present
