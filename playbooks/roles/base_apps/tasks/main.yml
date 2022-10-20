@@ -5,22 +5,29 @@
     state: present
     update_cache: yes
     cache_valid_time: 3600
-- name: Ensure NCDU is present (Ubuntu)
+- name: ensure NCDU is present (Ubuntu)
   apt:
     name: ncdu
     state: present
     cache_valid_time: 3600
   when: ansible_distribution == "Ubuntu"
-- name: Ensure NALA is present (Ubuntu >= 22)
+- name: ensure NALA is present (Ubuntu >= 22)
   apt:
     name: nala
     state: present
     cache_valid_time: 3600
   when:
     - ansible_facts['distribution_major_version'] is version('22', '>=')
-- name: Ensure MICRO is present (Ubuntu)
+- name: ensure MICRO is present (Ubuntu)
   apt:
     name: micro
     state: present
     cache_valid_time: 3600
   when: ansible_distribution == "Ubuntu"
+
+- name: ensure htop is present
+  apt:
+    name: htop
+    state: present
+    cache_valid_time: 3600
+  when: ansible_distribution =="Ubuntu"
