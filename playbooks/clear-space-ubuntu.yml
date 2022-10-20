@@ -1,0 +1,16 @@
+---
+- hosts: ubuntu
+  become: true
+
+  tasks:
+    - name: fix any broken install
+      shell: |
+        sudo apt --fix-broken install
+    
+    - name: remove old kernels
+      shell: |
+        sudo apt autoremove --purge
+
+    - name: clean apt cache
+      shell: |
+        sudo apt-get clean    
