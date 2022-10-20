@@ -1,0 +1,10 @@
+---
+# Documentation website
+# https://docs.ansible.com/ansible/latest/galaxy/user_guide.html
+roles:
+- wayofdev.dotfiles
+- geerlingguy.git
+
+
+collections:
+- community.general
