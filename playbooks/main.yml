@@ -12,11 +12,11 @@
     changed_when: false
     when: ansible_distribution == "Ubuntu"
   
-  - name: make sure that ansible requirements are present
-    tags: always
-    shell: |
-      ansible-galaxy install -r ./playbooks/requirements.yml
-    changed_when: false
+  # - name: make sure that ansible requirements are present
+  #   tags: always
+  #   shell: |
+  #     ansible-galaxy install -r ./playbooks/requirements.yml
+  #   changed_when: false
 
 
 - hosts: all
