@@ -48,3 +48,10 @@
     state: present
     cache_valid_time: 3600
   when: ansible_distribution == "Ubuntu"
+
+- name: ensure neofetch is present
+  apt:
+    name: neofetch
+    state: present
+    cache_valid_time: 3600
+  when: ansible_distribution == "Ubuntu"
