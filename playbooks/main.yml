@@ -24,5 +24,5 @@
   roles:
     - base
     - base_apps
-    # - zsh
+    - zsh
     - chezmoi
