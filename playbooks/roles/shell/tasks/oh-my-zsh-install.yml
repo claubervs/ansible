@@ -1,0 +1,16 @@
+---
+- name: download oh-my-zsh script
+  get_url:
+    url: https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    dest: ~/ohmyzsh.sh
+    mode: 0744
+
+- name: install oh-my-zsh script
+  command: ~/ohmyzsh.sh --keep-zshrc
+  register: install
+  changed_when: install.rc == 0
+
+- name: remove oh-my-zsh install script
+  file:
+    path: ~/ohmyzsh.sh
+    state: absent

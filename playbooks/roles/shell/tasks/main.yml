@@ -8,24 +8,20 @@
 - name: ensure zsh as default shell
   shell: |
     chsh -s $(which zsh)
-  # change_when: false
+  register: ret
+  changed_when: ret.rc != 0
 
-- name: download oh-my-zsh
-  get_url:
-    url:
-      https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-    dest: ~/ohmyzsh.sh
-    mode: 0744
+- name: check oh-my-zsh is present
+  file:
+    state: file
+    path: ~/.oh-my-zsh/oh-my-zsh.sh
+  register: installed
+  failed_when: false
+  # changed_when: installed.state == "absent"
 
 - name: install oh-my-zsh
-  command: ~/ohmyzsh.sh --keep-zshrc
-  register: install
-  changed_when: install.rc == 0
-
-- name: remove instakller script
-  file:
-    path: ~/ohmyzsh.sh
-    state: absent
+  include_tasks: oh-my-zsh-install.yml
+  when: installed.state == "absent"
 
 
 # - name: ensure powerlevel10k is present
