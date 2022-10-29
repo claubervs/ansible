@@ -1,6 +1,7 @@
 [ubuntu]
 # 10.10.10.106
-localhost ansible_connection=local
+jammy_server_test ansible_host=10.10.10.110
+# localhost ansible_connection=local
 
 [ubuntu:vars]
 ansible_ssh_user=ansible
