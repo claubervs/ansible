@@ -1,6 +1,7 @@
 ---
 - name: check user ansible is present
-  import_tasks: bootstrap.yml
+  include_tasks: bootstrap.yml
+  # TODO: include a when clause, bootstrapping should run if there is no ssh keypair for the user or no ansible user present.
 
 - name: make sure ssh key is present in the machine for the user ansible
   tags: always
