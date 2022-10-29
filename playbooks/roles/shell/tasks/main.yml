@@ -1,3 +1,4 @@
+---
 - name: ensure zsh is present
   apt:
     name: zsh
@@ -14,7 +15,7 @@
 - name: check oh-my-zsh is present
   file:
     state: file
-    path: ~/.oh-my-zsh/oh-my-zsh.sh
+    path: '{{ omz_path }}/oh-my-zsh.sh'
   register: installed
   failed_when: false
   # changed_when: installed.state == "absent"
@@ -23,13 +24,36 @@
   include_tasks: oh-my-zsh-install.yml
   when: installed.state == "absent"
 
+- name: ensure oh-my-zsh plugins are present
+  block:
+    - name: ensure zsh-autosuggestions
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions
+        dest: "{{ omz_custom_plugin_path }}/zsh-autosuggestions"
+        version: master
+        force: yes
+    - name: ensure zsh-syntax-highlighting
+      git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting
+        dest: "{{ omz_custom_plugin_path }}/zsh-syntax-highlighting"
+        version: master
+        force: yes
 
-# - name: ensure powerlevel10k is present
+- name: ensure powerlevel10k is present
+  git:
+    repo: https://github.com/romkatv/powerlevel10k
+    dest: "{{ omz_custom_theme_path }}/powerlevel10k"
+    version: master
+    force: yes
 
+- name: ensure powerlevel10k is enabled
+  lineinfile:
+    path: '{{ zshrc_fullpath }}'
+    state: present
+    regexp: '^ZSH_THEME='
+    line: 'ZSH_THEME="powerlevel10k/powerlevel10k"'
 
 # - name: ensure personal .bash_aliases is present
-
-
 
 # - name: ensure personal .zshrc is present
 

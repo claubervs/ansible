@@ -1,0 +1,15 @@
+---
+user_path: '~'
+config_path: '{{ user_path }}'
+
+zshrc_filename: .zshrc
+zshrc_fullpath: '{{ config_path }}/{{ zshrc_filename }}'
+
+aliases_filename: .bash_aliases
+aliases_fullpath: '{{ config_path }}/{{ aliases_filename }}'
+
+omz_path: '{{ config_path }}/.oh-my-zsh'
+omz_plugin_path: '{{ omz_path }}/plugins'
+omz_custom_plugin_path: '{{ omz_path }}/custom/plugins'
+omz_custom_theme_path: '{{ omz_path }}/custom/themes'
+
