@@ -26,19 +26,15 @@
 
 - name: ensure oh-my-zsh plugins are present
   block:
-    - name: ensure zsh-autosuggestions
+    - name: ensure plugin {{ item }}
       git:
-        repo: https://github.com/zsh-users/zsh-autosuggestions
-        dest: "{{ omz_custom_plugin_path }}/zsh-autosuggestions"
+        repo: https://github.com/zsh-users/{{ item }}
+        dest: "{{ omz_custom_plugin_path }}/{{ item }}"
         version: master
         force: yes
-    - name: ensure zsh-syntax-highlighting
-      git:
-        repo: https://github.com/zsh-users/zsh-syntax-highlighting
-        dest: "{{ omz_custom_plugin_path }}/zsh-syntax-highlighting"
-        version: master
-        force: yes
-
+        update: yes
+      with_items: "{{ zsh_plugins }}"
+    
 - name: ensure powerlevel10k is present
   git:
     repo: https://github.com/romkatv/powerlevel10k
@@ -53,7 +49,8 @@
     regexp: '^ZSH_THEME='
     line: 'ZSH_THEME="powerlevel10k/powerlevel10k"'
 
-# - name: ensure personal .bash_aliases is present
+- name: ensure personal .bash_aliases is present
+
 
 # - name: ensure personal .zshrc is present
 

@@ -13,3 +13,6 @@ omz_plugin_path: '{{ omz_path }}/plugins'
 omz_custom_plugin_path: '{{ omz_path }}/custom/plugins'
 omz_custom_theme_path: '{{ omz_path }}/custom/themes'
 
+zsh_plugins:
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
