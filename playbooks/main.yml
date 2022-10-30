@@ -20,9 +20,14 @@
 
 
 - hosts: all
-  become: true
+  # become: true
   roles:
     - base
     - base_apps
-    - shell
+    # - slick_shell
     # - chezmoi
+
+
+# - hosts: all
+#   post_tasks:
+  # TODO: Include the upgrade process to update all installed tools to the latest version.
