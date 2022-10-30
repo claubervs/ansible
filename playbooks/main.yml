@@ -28,6 +28,18 @@
     # - chezmoi
 
 
-# - hosts: all
-#   post_tasks:
-  # TODO: Include the upgrade process to update all installed tools to the latest version.
+- hosts: all
+  post_tasks:
+    - name: Check that the reboot-required exists
+      stat:
+        path: /var/run/reboot-required
+      register: p
+    - debug:
+        msg: "Reboot required"
+      when: p.stat.exists == true
+    - name: Reboot
+      reboot:
+        msg: Rebooting
+      when: p.stat.exists == true
+
+# TODO: Include the upgrade process to update all installed tools to the latest version.
