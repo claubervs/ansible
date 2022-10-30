@@ -1,57 +1,23 @@
-- name: make sure required software is installed
-  apt:
-    name:
-      - curl
-    state: present
-    update_cache: yes
-    cache_valid_time: 3600
+---
+- name: ensuring required software is present
+  block:
+    - name: ensure required software is present
+      apt:
+        name: '{{ item }}'
+        state: present
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_distribution == "Ubuntu"
+      become: true
+      loop: '{{ required_software|flatten(1) }}'
 
-- name: ensure NCDU is present (Ubuntu)
-  apt:
-    name: ncdu
-    state: present
-    cache_valid_time: 3600
-  when: ansible_distribution == "Ubuntu"
-
-- name: ensure NALA is present (Ubuntu >= 22)
-  apt:
-    name: nala
-    state: present
-    cache_valid_time: 3600
-  when:
-    - ansible_facts['distribution_major_version'] is version('22', '>=')
-
-- name: ensure MICRO is present (Ubuntu)
-  apt:
-    name: micro
-    state: present
-    cache_valid_time: 3600
-  when: ansible_distribution == "Ubuntu"
-
-- name: ensure htop is present
-  apt:
-    name: htop
-    state: present
-    cache_valid_time: 3600
-  when: ansible_distribution == "Ubuntu"
-
-- name: ensure midnight commander is present
-  apt:
-    name: mc
-    state: present
-    cache_valid_time: 3600
-  when: ansible_distribution == "Ubuntu"
-
-- name: ensure bat is present
-  apt:
-    name: bat
-    state: present
-    cache_valid_time: 3600
-  when: ansible_distribution == "Ubuntu"
-
-- name: ensure neofetch is present
-  apt:
-    name: neofetch
-    state: present
-    cache_valid_time: 3600
-  when: ansible_distribution == "Ubuntu"
+- name: ensuring basic software is present
+  block:
+    - name: ensure basic software is present
+      apt:
+        name: '{{ item }}'
+        state: present
+        cache_valid_time: 3600
+      when: ansible_distribution == "Ubuntu"
+      become: true
+      loop: '{{ basic_software|flatten(1) }}'

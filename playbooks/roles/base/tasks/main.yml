@@ -1,5 +1,5 @@
 ---
-- name: check user ansible is present
+- name: bootstrapping
   include_tasks: bootstrap.yml
   # TODO: include a when clause, bootstrapping should run if there is no ssh keypair for the user or no ansible user present.
 
@@ -8,3 +8,4 @@
   authorized_key:
     user: ansible
     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWnKkok7MjWFeJ4eCcxhaH9STAk8qiH/9d1q1iyNBRW ansible default"
+  become: true
