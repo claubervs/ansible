@@ -6,7 +6,7 @@ basic_software:
   - ncdu
   - nala
   - micro
-  - htop
+  - btop
   - mc
   - bat
   - neofetch
