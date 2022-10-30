@@ -22,6 +22,7 @@
 - hosts: all
   # become: true
   roles:
+    - sbaerlocher.qemu-guest-agent # https://github.com/sbaerlocher/ansible.qemu-guest-agent
     - base
     - base_apps
     # - slick_shell

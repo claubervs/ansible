@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+    - name: ensure ansible playsbooks are present
+      git:
+        repo: https://github.com/claubervs/ansible.git
+        dest: ~
+        version: master
+        force: yes
+        update: yes
