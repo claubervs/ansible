@@ -6,7 +6,7 @@
         name: '{{ item }}'
         state: present
         update_cache: yes
-        cache_valid_time: 3600
+        cache_valid_time: 21600
       when: ansible_distribution == "Ubuntu"
       become: true
       loop: '{{ required_software|flatten(1) }}'
@@ -17,7 +17,7 @@
       apt:
         name: '{{ item }}'
         state: present
-        cache_valid_time: 3600
+        cache_valid_time: 21600
       when: ansible_distribution == "Ubuntu"
       become: true
       loop: '{{ basic_software|flatten(1) }}'

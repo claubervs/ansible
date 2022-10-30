@@ -38,4 +38,11 @@
         regexp: '^%sudo'
         line: '%sudo ALL=(ALL) NOPASSWD: ALL'
         validate: /usr/sbin/visudo -cf %s
+
+    - name: Ensure includedir in Sudoers
+      ansible.builtin.lineinfile:
+        dest: /etc/sudoers
+        line: '#includedir /etc/sudoers.d'
+        state: present
+        validate: '/usr/sbin/visudo -cf %s'
   become: true
