@@ -1,28 +1,31 @@
 ---
-- name: make sure OS is updated
-  tags: always
-  apt:
-    update_cache: yes
-    cache_valid_time: 3600
-  when: ansible_distribution == "Ubuntu"
+- name: inside bootstrap
+  block: 
+    - name: make sure OS is updated
+      tags: always
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_distribution == "Ubuntu"
 
-- name: make sure ansible user is present
-  tags: always
-  user:
-    name: ansible
-    groups: root
+    - name: make sure ansible user is present
+      tags: always
+      user:
+        name: ansible
+        groups: root
 
-- name: make sure ssh key is present in the machine for the user ansible
-  tags: always
-  authorized_key:
-    user: ansible
-    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWnKkok7MjWFeJ4eCcxhaH9STAk8qiH/9d1q1iyNBRW ansible default"
-  
-- name: make sure the user can run commands with no password
-  tags: always
-  copy:
-    src: ../files/sudoer_ansible
-    dest: /etc/sudoers.d/ansible
-    owner: root
-    group: root
-    mode: 0440
+    - name: make sure ssh key is present in the machine for the user ansible
+      tags: always
+      authorized_key:
+        user: ansible
+        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWnKkok7MjWFeJ4eCcxhaH9STAk8qiH/9d1q1iyNBRW ansible default"
+      
+    - name: make sure the user can run commands with no password
+      tags: always
+      copy:
+        src: ../files/sudoer_ansible
+        dest: /etc/sudoers.d/ansible
+        owner: root
+        group: root
+        mode: 0440
+  become: true
