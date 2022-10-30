@@ -25,6 +25,12 @@
     - sbaerlocher.qemu-guest-agent # https://github.com/sbaerlocher/ansible.qemu-guest-agent
     - base
     - base_apps
+    - name: wayofdev.dotfiles
+      vars:
+        - dotfiles_repository_url: "https://github.com/claubervs/ansible.git"
+        - dotfiles_repository_branch: main
+      environment:
+        - PATH: "/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
     # - slick_shell
     # - chezmoi
 
