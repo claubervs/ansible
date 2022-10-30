@@ -25,12 +25,26 @@
     - sbaerlocher.qemu-guest-agent # https://github.com/sbaerlocher/ansible.qemu-guest-agent
     - base
     - base_apps
-    - name: wayofdev.dotfiles
+    - role: wayofdev.dotfiles
       vars:
         - dotfiles_repository_url: "https://github.com/claubervs/ansible.git"
         - dotfiles_repository_branch: main
       environment:
         - PATH: "/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    # https://scruffaluff.github.io/bootware/software.html
+    # - scruffaluff.bootware.age
+    - scruffaluff.bootware.fzf
+    - scruffaluff.bootware.zoxide
+    - scruffaluff.bootware.exa
+    - scruffaluff.bootware.lazygit
+    - scruffaluff.bootware.navi
+    # - scruffaluff.bootware.ripgrep
+    # - scruffaluff.bootware.rclone
+    # - scruffaluff.bootware.sops
+    - scruffaluff.bootware.tldr
+    # - scruffaluff.bootware.tmux
+    # - scruffaluff.bootware.zellij
+
     # - slick_shell
     # - chezmoi
 
