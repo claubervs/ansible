@@ -1,0 +1,12 @@
+---
+required_software:
+  - curl
+
+basic_software:
+  - ncdu
+  - nala
+  - micro
+  - htop
+  - mc
+  - bat
+  - neofetch
