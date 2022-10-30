@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# curl https://raw.githubusercontent.com/claubervs/ansible/main/bootstrap.sh | bash
+
 set -eu
 
 title() {
@@ -12,18 +15,21 @@ sudo apt update
 sudo apt install python3-pip -y
 sudo pip3 install ansible
 
+title "Download playbook to ~/install.yml"
+curl https://raw.githubusercontent.com/claubervs/ansible/main/bootstrap.yml > ~/bootstrap.yml
+
+title "Provision ansible playbooks"
+ansible-playbook -i "localhost," -c local -b ~/bootstrap.yml
+
 title "Install requirements"
-ansible-galaxy install -r requirements.yml
+ansible-galaxy install -r ~/ansible/requirements.yml --force
 # ansible-galaxy install -r requirements.yml --force
 
-title "Download playbook to /tmp/zsh.yml"
-curl https://raw.githubusercontent.com/viasite-ansible/ansible-role-zsh/master/playbook.yml > /tmp/zsh.yml
-
 title "Provision playbook for root"
-ansible-playbook -i "localhost," -c local -b /tmp/zsh.yml
+ansible-playbook -i "localhost," -c local -b ~/ansible/main.yml
 
-title "Provision playbook for $(whoami)"
-ansible-playbook -i "localhost," -c local -b /tmp/zsh.yml --extra-vars="zsh_user=$(whoami)"
+# title "Provision playbook for $(whoami)"
+# ansible-playbook -i "localhost," -c local -b /tmp/zsh.yml --extra-vars="zsh_user=$(whoami)"
 
 title "Finished! Please, restart your shell."
 echo ""
