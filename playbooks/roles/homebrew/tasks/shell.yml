@@ -1,0 +1,16 @@
+---
+- name: Set path to Linuxbrew prefix
+  ansible.builtin.set_fact:
+    linuxbrew_prefix: "{{ item }}"
+  with_first_found:
+    - "{{ linuxbrew_prefix_shared }}"
+    - "{{ linuxbrew_prefix_user }}"
+  become: true
+
+- name: Load Linuxbrew in bash
+  ansible.builtin.include_tasks: shell_bash.yml
+  when: linuxbrew_prefix is defined
+
+- name: Load Linuxbrew in zsh
+  ansible.builtin.include_tasks: shell_zsh.yml
+  when: linuxbrew_prefix is defined

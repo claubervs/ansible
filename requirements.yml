@@ -6,7 +6,8 @@
 # ansible-galaxy install -r ./playbooks/requirements.yml
 roles:
   - wayofdev.dotfiles
-  - wayofdev.homebrew
+  # - wayofdev.homebrew
+  - markosamuli.linuxbrew
   - geerlingguy.git
   - sbaerlocher.qemu-guest-agent
 
