@@ -1,16 +1,16 @@
 ---
-- name: download oh-my-zsh script
-  get_url:
+- name: Download oh-my-zsh script
+  ansible.builtin.get_url:
     url: https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
     dest: '{{ user_path }}/ohmyzsh.sh'
     mode: 0744
 
-- name: install oh-my-zsh script
-  command: '{{ user_path }}/ohmyzsh.sh --keep-zshrc'
+- name: Install oh-my-zsh script
+  ansible.builtin.command: '{{ user_path }}/ohmyzsh.sh --keep-zshrc'
   register: install
   changed_when: install.rc == 0
 
-- name: remove oh-my-zsh install script
-  file:
+- name: Remove oh-my-zsh install script
+  ansible.builtin.file:
     path: '{{ user_path }}/ohmyzsh.sh'
     state: absent

@@ -1,23 +1,23 @@
 ---
-- name: ensuring required software is present
+- name: Main | ensuring required software is present
   block:
-    - name: ensure required software is present
-      apt:
+    - name: Main | ensure required software is present
+      ansible.builtin.apt:
         name: '{{ item }}'
         state: present
-        update_cache: yes
+        update_cache: true
         cache_valid_time: 21600
       when: ansible_distribution == "Ubuntu"
       become: true
-      loop: '{{ required_software|flatten(1) }}'
+      loop: '{{ required_software | flatten(1) }}'
 
-- name: ensuring basic software is present
+- name: Main | ensuring basic software is present
   block:
-    - name: ensure basic software is present
-      apt:
+    - name: Main | ensure basic software is present
+      ansible.builtin.apt:
         name: '{{ item }}'
         state: present
         cache_valid_time: 21600
       when: ansible_distribution == "Ubuntu"
       become: true
-      loop: '{{ basic_software|flatten(1) }}'
+      loop: '{{ basic_software | flatten(1) }}'

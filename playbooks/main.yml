@@ -1,17 +1,17 @@
 ---
 - hosts: all
+  name: Executing pre_tasks
   become: true
   pre_tasks:
 
 
-  - name: update repo index (Ubuntu)
+  - name: Update repo index (Ubuntu)
     tags: always
-    apt:
-      update_cache: yes
+    ansible.builtin.apt:
+      update_cache: true
       cache_valid_time: 3600
     changed_when: false
     when: ansible_distribution == "Ubuntu"
-  
   # - name: make sure that ansible requirements are present
   #   tags: always
   #   shell: |
@@ -20,6 +20,7 @@
 
 
 - hosts: all
+  name: Executing main tasks
   # become: true
   roles:
     # - sbaerlocher.qemu-guest-agent # DOCS: https://github.com/sbaerlocher/ansible.qemu-guest-agent
@@ -35,29 +36,29 @@
       become: true
       environment:
         - PATH: "{{ homebrew_search_paths | join(':') }}:{{ ansible_env.PATH }}"
-      vars:
+      # vars:
         # - homebrew_user: linuxbrew  # FYI: can be skipped, as automatically detected, but linuxbrew user is recommended way for installing Homebrew with Linux
         # - homebrew_group: linuxbrew  # same as homebrew_user
-        - homebrew_upgrade_all: true
-        - homebrew_clear_cache: true
-        - homebrew_collect_analytics: false
-        - homebrew_taps:
-          - name: homebrew/core
-            state: present
-          - name: homebrew/cask-versions
-            state: present
-          - name: homebrew/cask-fonts
-            state: present
-          - name: jesseduffield/lazygit/lazygit
-            state: present
-        - homebrew_packages:
-          - fzf
-          - lazygit
-          - navi
+        # - homebrew_upgrade_all: true
+        # - homebrew_clear_cache: true
+        # - homebrew_collect_analytics: false
+        # - homebrew_taps:
+        #   - name: homebrew/core
+        #     state: present
+        #   - name: homebrew/cask-versions
+        #     state: present
+        #   - name: homebrew/cask-fonts
+        #     state: present
+        #   - name: jesseduffield/lazygit/lazygit
+        #     state: present
+        # - homebrew_packages:
+          # - fzf
+          # - lazygit
+          # - navi
+          # - tldr
           # - rsync
           # - rclone
           # - sops
-          - tldr
           # - age
           # - zellij
     # - slick_shell
@@ -65,17 +66,19 @@
 
 
 - hosts: all
+  name: Post Tasks | Executing post_tasks
   post_tasks:
-    - name: Check that the reboot-required exists
-      stat:
+    - name: Post Tasks | Check that the reboot-required exists
+      ansible.builtin.stat:
         path: /var/run/reboot-required
       register: p
-    - debug:
+    - name: Post Tasks | Debug
+      ansible.builtin.debug:
         msg: "Reboot required"
-      when: p.stat.exists == true
-    - name: Reboot
-      reboot:
+      when: p.stat.exists
+    - name: Post Tasks | Reboot
+      ansible.builtin.reboot:
         msg: Rebooting
-      when: p.stat.exists == true
+      when: p.stat.exists
 
 # TODO: Include the upgrade process to update all installed tools to the latest version.

@@ -1,7 +1,6 @@
-- name: ensure chezmoi is present in the system
-  community.general.snap: 
+- name: Main | ensure chezmoi is present in the system
+  community.general.snap:
     name:
       - chezmoi
     state: present
     classic: true
-

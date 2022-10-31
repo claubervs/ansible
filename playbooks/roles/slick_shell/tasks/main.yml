@@ -1,55 +1,55 @@
 ---
-- name: ensure zsh is present
-  apt:
+- name: Ensure zsh is present
+  ansible.builtin.apt:
     name: zsh
     state: present
     cache_valid_time: 3600
   when: ansible_distribution == "Ubuntu"
 
-- name: ensure zsh as default shell
-  shell: |
+- name: Ensure zsh as default shell
+  ansible.builtin.shell: |
     chsh -s $(which zsh)
   register: ret
   changed_when: ret.rc != 0
 
-- name: check oh-my-zsh is present
-  file:
+- name: Check oh-my-zsh is present
+  ansible.builtin.file:
     state: file
     path: '{{ omz_path }}/oh-my-zsh.sh'
   register: installed
   failed_when: false
   # changed_when: installed.state == "absent"
 
-- name: install oh-my-zsh
+- name: Install oh-my-zsh
   include_tasks: oh-my-zsh-install.yml
   when: installed.state == "absent"
 
-- name: ensure oh-my-zsh plugins are present
+- name: Ensure oh-my-zsh plugins are present
   block:
-    - name: ensure plugin {{ item }}
-      git:
+    - name: Ensure plugin {{ item }}
+      ansible.builtin.git:
         repo: https://github.com/zsh-users/{{ item }}
         dest: "{{ omz_custom_plugin_path }}/{{ item }}"
         version: master
-        force: yes
-        update: yes
+        force: true
+        update: true
       with_items: "{{ zsh_plugins }}"
-    
-- name: ensure powerlevel10k is present
-  git:
+
+- name: Ensure powerlevel10k is present
+  ansible.builtin.git:
     repo: https://github.com/romkatv/powerlevel10k
     dest: "{{ omz_custom_theme_path }}/powerlevel10k"
     version: master
-    force: yes
+    force: true
 
-- name: ensure powerlevel10k is enabled
-  lineinfile:
+- name: Ensure powerlevel10k is enabled
+  ansible.builtin.lineinfile:
     path: '{{ zshrc_fullpath }}'
     state: present
     regexp: '^ZSH_THEME='
     line: 'ZSH_THEME="powerlevel10k/powerlevel10k"'
 
-- name: ensure personal .bash_aliases is present
+# - name: ensure personal .bash_aliases is present
 
 
 # - name: ensure personal .zshrc is present

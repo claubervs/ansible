@@ -1,16 +1,17 @@
 ---
 - hosts: ubuntu
+  name: Playbook | clear space in Ubuntu
   become: true
 
   tasks:
-    - name: fix any broken install
-      shell: |
+    - name: Fix any broken install
+      ansible.builtin.shell: |
         sudo apt --fix-broken install
-    
-    - name: remove old kernels
-      shell: |
+
+    - name: Remove old kernels
+      ansible.builtin.shell: |
         sudo apt autoremove --purge
 
-    - name: clean apt cache
-      shell: |
-        sudo apt-get clean    
+    - name: Clean apt cache
+      ansible.builtin.shell: |
+        sudo apt-get clean

@@ -1,18 +1,18 @@
 ---
 - name: Ensure python3 and pip3 are present
   hosts: all
-  become: yes
+  become: true
   tasks:
   - name: Ensure python3 is present
     tags: python
-    apt:
+    ansible.builtin.apt:
       name: python3
       state: present
-      update_cache: yes
+      update_cache: true
   - name: Ensure pip3 is present
     tags: pip, python
-    apt:
+    ansible.builtin.apt:
       name: python3-pip
       state: present
-      update_cache: yes
+      update_cache: true
 ...

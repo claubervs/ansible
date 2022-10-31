@@ -1,10 +1,11 @@
 ---
 - hosts: all
+  name: Playbook | bootstrap
   tasks:
-    - name: ensure ansible playsbooks are present
-      git:
+    - name: Ensure ansible playsbooks are present
+      ansible.builtin.git:
         repo: https://github.com/claubervs/ansible.git
         dest: ~
         version: master
-        force: yes
-        update: yes
+        force: true
+        update: true

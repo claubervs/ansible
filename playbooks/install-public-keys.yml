@@ -1,5 +1,6 @@
 ---
 - hosts: ubuntu
+  name: Playbook | Install public keys
   become: true
   tasks:
     - name: Install public keys

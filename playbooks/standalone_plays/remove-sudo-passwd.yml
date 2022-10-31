@@ -1,6 +1,7 @@
 ---
 - hosts: ubuntu
-  become: yes
+  name: Playbook | remove need for sudo password
+  become: true
   tasks:
     - name: Ensure sudo password is not required
       tags: sudo

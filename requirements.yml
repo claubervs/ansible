@@ -1,16 +1,17 @@
 ---
 # Documentation website
 # https://docs.ansible.com/ansible/latest/galaxy/user_guide.html
-# 
+#
 # To install these roles please run the command below:
 # ansible-galaxy install -r ./playbooks/requirements.yml
 roles:
-- wayofdev.dotfiles
-- wayofdev.homebrew
-- geerlingguy.git
-- sbaerlocher.qemu-guest-agent
+  - wayofdev.dotfiles
+  - wayofdev.homebrew
+  - geerlingguy.git
+  - sbaerlocher.qemu-guest-agent
 
 
 collections:
-- community.general
-# - scruffaluff.bootware
+  - community.general
+  # - scruffaluff.bootware
+...
