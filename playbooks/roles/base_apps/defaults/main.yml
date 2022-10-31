@@ -10,3 +10,7 @@ basic_software:
   - mc
   - bat
   - neofetch
+  - exa
+  - zoxide
+  # - ripgrep
+  # - tmux

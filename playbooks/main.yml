@@ -22,29 +22,44 @@
 - hosts: all
   # become: true
   roles:
-    - sbaerlocher.qemu-guest-agent # https://github.com/sbaerlocher/ansible.qemu-guest-agent
-    - base
-    - base_apps
-    - role: wayofdev.dotfiles
-      vars:
-        - dotfiles_repository_url: "https://github.com/claubervs/ansible.git"
-        - dotfiles_repository_branch: main
+    # - sbaerlocher.qemu-guest-agent # DOCS: https://github.com/sbaerlocher/ansible.qemu-guest-agent
+    # - base
+    # - base_apps
+    # - role: wayofdev.dotfiles
+    #   environment:
+    #     - PATH: "/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    #   vars:
+    #     - dotfiles_repository_url: "https://github.com/claubervs/ansible.git"
+    #     - dotfiles_repository_branch: main
+    - role: wayofdev.homebrew # DOCS: https://galaxy.ansible.com/wayofdev/homebrew
+      become: true
       environment:
-        - PATH: "/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
-    # https://scruffaluff.github.io/bootware/software.html
-    # - scruffaluff.bootware.age
-    - scruffaluff.bootware.fzf
-    - scruffaluff.bootware.zoxide
-    - scruffaluff.bootware.exa
-    - scruffaluff.bootware.lazygit
-    - scruffaluff.bootware.navi
-    # - scruffaluff.bootware.ripgrep
-    # - scruffaluff.bootware.rclone
-    # - scruffaluff.bootware.sops
-    - scruffaluff.bootware.tldr
-    # - scruffaluff.bootware.tmux
-    # - scruffaluff.bootware.zellij
-
+        - PATH: "{{ homebrew_search_paths | join(':') }}:{{ ansible_env.PATH }}"
+      vars:
+        # - homebrew_user: linuxbrew  # FYI: can be skipped, as automatically detected, but linuxbrew user is recommended way for installing Homebrew with Linux
+        # - homebrew_group: linuxbrew  # same as homebrew_user
+        - homebrew_upgrade_all: true
+        - homebrew_clear_cache: true
+        - homebrew_collect_analytics: false
+        - homebrew_taps:
+          - name: homebrew/core
+            state: present
+          - name: homebrew/cask-versions
+            state: present
+          - name: homebrew/cask-fonts
+            state: present
+          - name: jesseduffield/lazygit/lazygit
+            state: present
+        - homebrew_packages:
+          - fzf
+          - lazygit
+          - navi
+          # - rsync
+          # - rclone
+          # - sops
+          - tldr
+          # - age
+          # - zellij
     # - slick_shell
     # - chezmoi
 
