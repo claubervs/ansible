@@ -25,3 +25,12 @@
 - name: Configure Linuxbrew in shell
   ansible.builtin.include_tasks: shell.yml
   when: linuxbrew_init_shell|bool
+
+# - name: Brew favourites
+#   homebrew:
+#     name: '{{ item }}'
+#     state: present
+#   with_items:
+#     - fzf
+#     - lazygit
+#     - navi

@@ -34,37 +34,37 @@
     #   vars:
     #     - dotfiles_repository_url: "https://github.com/claubervs/ansible.git"
     #     - dotfiles_repository_branch: main
-    
-    # - role: wayofdev.homebrew # DOCS: https://galaxy.ansible.com/wayofdev/homebrew
-    #   become: true
-    #   environment:
-    #     - PATH: "{{ homebrew_search_paths | join(':') }}:{{ ansible_env.PATH }}"
-      # vars:
-        # - homebrew_user: linuxbrew  # FYI: can be skipped, as automatically detected, but linuxbrew user is recommended way for installing Homebrew with Linux
-        # - homebrew_group: linuxbrew  # same as homebrew_user
-        # - homebrew_upgrade_all: true
-        # - homebrew_clear_cache: true
-        # - homebrew_collect_analytics: false
-        # - homebrew_taps:
-        #   - name: homebrew/core
-        #     state: present
-        #   - name: homebrew/cask-versions
-        #     state: present
-        #   - name: homebrew/cask-fonts
-        #     state: present
-        #   - name: jesseduffield/lazygit/lazygit
-        #     state: present
-        # - homebrew_packages:
-          # - fzf
-          # - lazygit
-          # - navi
+
+    - role: linuxbrew # DOCS: https://galaxy.ansible.com/wayofdev/homebrew
+      # become: true
+      environment:
+        - PATH: "{{ homebrew_search_paths | join(':') }}:{{ ansible_env.PATH }}"
+      vars:
+        - homebrew_user: linuxbrew  # FYI: can be skipped, as automatically detected, but linuxbrew user is recommended way for installing Homebrew with Linux
+        - homebrew_group: linuxbrew  # same as homebrew_user
+        - homebrew_upgrade_all: true
+        - homebrew_clear_cache: true
+        - homebrew_collect_analytics: false
+        - homebrew_taps:
+            - name: homebrew/core
+              state: present
+            - name: homebrew/cask-versions
+              state: present
+            - name: homebrew/cask-fonts
+              state: present
+            - name: jesseduffield/lazygit/lazygit
+              state: present
+        - homebrew_packages:
+            - fzf
+            - lazygit
+            - navi
           # - tldr
           # - rsync
           # - rclone
           # - sops
           # - age
           # - zellij
-    
+
     # - slick_shell
     # - chezmoi
 
