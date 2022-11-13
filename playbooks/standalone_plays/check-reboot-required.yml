@@ -1,0 +1,11 @@
+- name: Check if restart is required
+  hosts: all
+  tasks:
+    - name: Check that the reboot-required exists
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: p
+    - name: Write to debug
+      ansible.builtin.debug:
+        msg: "Reboot required"
+      when: p.stat.exists
