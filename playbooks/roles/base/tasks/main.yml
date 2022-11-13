@@ -9,3 +9,30 @@
     user: ansible
     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWnKkok7MjWFeJ4eCcxhaH9STAk8qiH/9d1q1iyNBRW ansible default"
   become: true
+
+# - name: Print all available facts
+#   ansible.builtin.debug:
+#     var: ansible_facts
+
+- name: Main | ensure qemu guest agent when on proxmox
+  tags: guestagent
+  ansible.builtin.apt:
+    name: qemu-guest-agent
+    state: present
+    update_cache: true
+  become: true
+  when: ansible_system_vendor == 'QEMU'
+
+- name: Main | check if restart is required
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+  register: p
+  
+- name: Write to debug
+  ansible.builtin.debug:
+    msg: "Reboot required"
+  when: p.stat.exists
+
+- name: Main | restart
+  ansible.builtin.reboot:
+  when: p.stat.exists

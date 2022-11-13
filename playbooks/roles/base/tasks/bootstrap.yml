@@ -24,7 +24,7 @@
     - name: Bootstrap | make sure the user can run commands with no password
       tags: always
       ansible.builtin.copy:
-        src: /files/sudoer_ansible
+        src: ../files/sudoer_ansible
         dest: /etc/sudoers.d/ansible
         owner: root
         group: root
