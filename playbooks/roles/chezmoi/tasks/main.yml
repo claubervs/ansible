@@ -1,6 +1,14 @@
 - name: Main | ensure chezmoi is present in the system
+  become: true
   community.general.snap:
     name:
       - chezmoi
     state: present
     classic: true
+
+- name: Main | ensure chezmoi repository is present and updated
+  become: true
+  changed_when: false
+  ansible.builtin.command:
+    cmd: chezmoi init --apply {{ _chezmoi_username }}
+    chdir: ~

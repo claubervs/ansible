@@ -30,12 +30,8 @@
     # - sbaerlocher.qemu-guest-agent # DOCS: https://github.com/sbaerlocher/ansible.qemu-guest-agent
     - base
     - base_apps
-    - role: wayofdev.dotfiles
-      environment:
-        - PATH: "/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
-      vars:
-        - dotfiles_repository_url: "https://github.com/claubervs/ansible.git"
-        - dotfiles_repository_branch: main
+    - chezmoi
+
 
 ###########################################################################
 ### DISABLED ROLES
@@ -69,6 +65,12 @@
           # - sops
           # - age
           # - zellij
+    # - role: wayofdev.dotfiles
+    #   environment:
+    #     - PATH: "/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    #   vars:
+    #     - dotfiles_repository_url: "https://github.com/claubervs/ansible.git"
+    #     - dotfiles_repository_branch: main
 
 ###########################################################################
 ### POST TASKS
