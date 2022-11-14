@@ -1,4 +1,5 @@
 ---
+username: 'clauber'
 user_path: '~'
 config_path: '{{ user_path }}'
 

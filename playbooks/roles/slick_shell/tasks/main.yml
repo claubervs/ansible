@@ -7,12 +7,18 @@
     cache_valid_time: 3600
   when: ansible_distribution == "Ubuntu"
 
-- name: Ensure zsh as default shell
+# - name: Ensure zsh as default shell
+#   become: true
+#   ansible.builtin.shell: |
+#     chsh -s $(which zsh)
+#   register: ret
+#   changed_when: ret.rc != 0
+
+- name: Ensure zsh is default shell
   become: true
-  ansible.builtin.shell: |
-    chsh -s $(which zsh)
-  register: ret
-  changed_when: ret.rc != 0
+  ansible.builtin.user:
+    name: '{{ username }}'
+    shell: /bin/zsh
 
 - name: Check oh-my-zsh is present
   ansible.builtin.file:
@@ -20,7 +26,7 @@
     path: '{{ omz_path }}/oh-my-zsh.sh'
   register: installed
   failed_when: false
-  # changed_when: installed.state == "absent"
+  changed_when: installed.state == "absent"
 
 - name: Install oh-my-zsh
   include_tasks: oh-my-zsh-install.yml
@@ -28,7 +34,7 @@
 
 - name: Ensure oh-my-zsh plugins are present
   block:
-    - name: Ensure plugin {{ item }}
+    - name: Ensure plugins are present
       ansible.builtin.git:
         repo: https://github.com/zsh-users/{{ item }}
         dest: "{{ omz_custom_plugin_path }}/{{ item }}"
