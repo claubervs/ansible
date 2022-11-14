@@ -1,5 +1,6 @@
 ---
 - name: Ensure zsh is present
+  become: true
   ansible.builtin.apt:
     name: zsh
     state: present
@@ -7,6 +8,7 @@
   when: ansible_distribution == "Ubuntu"
 
 - name: Ensure zsh as default shell
+  become: true
   ansible.builtin.shell: |
     chsh -s $(which zsh)
   register: ret

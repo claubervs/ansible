@@ -7,8 +7,8 @@
     classic: true
 
 - name: Main | ensure chezmoi repository is present and updated
-  become: true
-  changed_when: false
+  # become: true
+  # changed_when: false
   ansible.builtin.command:
-    cmd: chezmoi init --apply {{ _chezmoi_username }}
-    chdir: ~
+    cmd: 'chezmoi init --apply {{ _chezmoi_username }}'
+    # chdir: /home/clauber/

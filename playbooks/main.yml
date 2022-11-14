@@ -30,6 +30,7 @@
     # - sbaerlocher.qemu-guest-agent # DOCS: https://github.com/sbaerlocher/ansible.qemu-guest-agent
     - base
     - base_apps
+    # - slick_shell
     - chezmoi
 
 
