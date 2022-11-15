@@ -10,5 +10,5 @@
   # become: true
   # changed_when: false
   ansible.builtin.command:
-    cmd: 'chezmoi init --apply {{ _chezmoi_username }}'
+    cmd: 'chezmoi init --apply {{ _chezmoi_username }} && chezmoi update'
     # chdir: /home/clauber/

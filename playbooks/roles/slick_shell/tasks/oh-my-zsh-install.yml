@@ -10,7 +10,7 @@
   # become: true
   ansible.builtin.command: '{{ user_path }}/ohmyzsh.sh --keep-zshrc -unattended'
   register: install
-  # changed_when: install.rc == 0
+  changed_when: install.rc == 0
 
 - name: Remove oh-my-zsh install script
   # become: true

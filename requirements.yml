@@ -10,7 +10,7 @@ roles:
   - markosamuli.linuxbrew
   - geerlingguy.git
   - sbaerlocher.qemu-guest-agent
-
+  - gantsign.git_user
 
 collections:
   - community.general
