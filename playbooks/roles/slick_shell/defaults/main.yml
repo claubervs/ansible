@@ -15,5 +15,10 @@ omz_custom_plugin_path: '{{ omz_path }}/custom/plugins'
 omz_custom_theme_path: '{{ omz_path }}/custom/themes'
 
 zsh_plugins:
+  - git
   - zsh-autosuggestions
   - zsh-syntax-highlighting
+
+zsh_theme: powerlevel10k
+
+zsh_user: claubervs

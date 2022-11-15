@@ -11,6 +11,7 @@ roles:
   - geerlingguy.git
   - sbaerlocher.qemu-guest-agent
   - gantsign.git_user
+  - gantsign.oh-my-zsh
 
 collections:
   - community.general
