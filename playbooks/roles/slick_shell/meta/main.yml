@@ -1,3 +1,11 @@
 ---
 # dependencies:
 #   - role: chezmoi
+  # - role: gantsign.oh-my-zsh
+  #   users:
+  #     - username: "{{ zsh_user }}"
+  #       oh_my_zsh:
+  #         theme: "{{ zsh_theme }}"
+  #         plugins:
+  #           - "{{ zsh_included_plugins }}"
+...

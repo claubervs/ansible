@@ -34,5 +34,11 @@
   when: p.stat.exists
 
 - name: Main | restart
+  become: true
   ansible.builtin.reboot:
+    post_reboot_delay: 60
+  when: p.stat.exists
+
+- name: gather facts after reboot
+  ansible.builtin.setup:
   when: p.stat.exists

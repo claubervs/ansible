@@ -6,9 +6,16 @@
     state: present
     classic: true
 
-- name: Main | ensure chezmoi repository is present and updated
+- name: Main | ensure chezmoi repository is present
   # become: true
   # changed_when: false
   ansible.builtin.command:
-    cmd: 'chezmoi init --apply {{ _chezmoi_username }} && chezmoi update'
+    cmd: 'chezmoi init --apply {{ _chezmoi_username }}'
+    # chdir: /home/clauber/
+
+- name: Main | ensure chezmoi repository is updated
+  # become: true
+  # changed_when: false
+  ansible.builtin.command:
+    cmd: 'chezmoi update'
     # chdir: /home/clauber/
