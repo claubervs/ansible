@@ -20,6 +20,10 @@
 #     name: '{{ username }}'
 #     shell: /bin/zsh
 
+- name: Main | check required fonts are present
+  ansible.builtin.include_tasks:
+    nerdfonts.ansible.yml
+
 - name: Main | check oh-my-zsh is present
   ansible.builtin.file:
     state: file

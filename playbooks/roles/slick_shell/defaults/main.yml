@@ -24,3 +24,6 @@ zsh_plugins:
 zsh_theme: powerlevel10k
 
 zsh_user: clauber
+
+system_user_name: "{{ username }}"
+system_user_group: "{{ username }}"

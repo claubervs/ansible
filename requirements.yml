@@ -12,6 +12,7 @@ roles:
   - sbaerlocher.qemu-guest-agent
   - gantsign.git_user
   - gantsign.oh-my-zsh
+  - ctorgalson.nerdfonts
 
 collections:
   - community.general

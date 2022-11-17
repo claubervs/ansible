@@ -1,0 +1,10 @@
+---
+- name: Nerdfonts | ensure nerdfonts are present
+  ansible.builtin.include_role:
+    name: ctorgalson.nerdfonts
+  vars:
+    nf_user: "{{ system_user_name }}"
+    nf_group: "{{ system_user_group }}"
+    nf_single_fonts:
+      - "FiraCode/Regular/complete/Fira Code Regular Nerd Font Complete.ttf"
+...

@@ -38,13 +38,6 @@
           git_user_email: claubervs@gmail.com
           git_user_force: true
     - slick_shell
-    # - role: gantsign.oh-my-zsh
-    #   users:
-    #     - username: clauber
-    #       oh_my_zsh:
-    #         theme: powerlevel10k
-    #         plugins:
-    #           - git
     - chezmoi
 
 
