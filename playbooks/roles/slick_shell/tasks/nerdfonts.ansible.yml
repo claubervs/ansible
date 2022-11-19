@@ -1,5 +1,8 @@
 ---
-- name: Nerdfonts | ensure nerdfonts are present
+- name: Nerdfonts | Ensure nerdfonts are present
+  tags:
+    - basic
+    - nerdfonts
   ansible.builtin.include_role:
     name: ctorgalson.nerdfonts
   vars:

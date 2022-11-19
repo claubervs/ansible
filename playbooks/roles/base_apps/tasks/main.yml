@@ -1,7 +1,8 @@
 ---
 - name: Main | ensuring required software is present
+  tags: basic
   block:
-    - name: Main | ensure required software is present
+    - name: Main | Ensure required software is present
       ansible.builtin.apt:
         name: '{{ item }}'
         state: present
@@ -11,7 +12,8 @@
       become: true
       loop: '{{ required_software | flatten(1) }}'
 
-- name: Main | ensuring basic software is present
+- name: Main | Ensuring basic software is present
+  tags: basic
   block:
     - name: Main | ensure basic software is present
       ansible.builtin.apt:
@@ -21,3 +23,4 @@
       when: ansible_distribution == "Ubuntu"
       become: true
       loop: '{{ basic_software | flatten(1) }}'
+...

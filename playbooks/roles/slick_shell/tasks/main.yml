@@ -1,64 +1,79 @@
 ---
-# - name: Ensure zsh is present
-#   become: true
-#   ansible.builtin.apt:
-#     name: zsh
-#     state: present
-#     cache_valid_time: 3600
-#   when: ansible_distribution == "Ubuntu"
-
-# # - name: Ensure zsh as default shell
-# #   become: true
-# #   ansible.builtin.shell: |
-# #     chsh -s $(which zsh)
-# #   register: ret
-# #   changed_when: ret.rc != 0
-
-# - name: Ensure zsh is default shell
-#   become: true
-#   ansible.builtin.user:
-#     name: '{{ username }}'
-#     shell: /bin/zsh
-
-- name: Main | check required fonts are present
-  ansible.builtin.include_tasks:
-    nerdfonts.ansible.yml
-
-- name: Main | check oh-my-zsh is present
-  ansible.builtin.file:
-    state: file
-    path: '{{ omz_path }}/oh-my-zsh.sh'
-  register: installed
-  failed_when: false
-  changed_when: installed.state == "absent"
-
-- name: Install oh-my-zsh
-  include_tasks: oh-my-zsh-install.yml
-  when: installed.state == "absent"
-
-- name: Ensure oh-my-zsh plugins are present
+- name: Slick_Shell Main
+  tags:
+    - basic
   block:
-    - name: Ensure plugins are present
-      ansible.builtin.git:
-        repo: https://github.com/zsh-users/{{ item }}
-        dest: "{{ omz_custom_plugin_path }}/{{ item }}"
-        version: master
-        force: true
-        update: true
-      with_items: "{{ zsh_plugins }}"
+    # - name: Ensure zsh is present
+    #   become: true
+    #   ansible.builtin.apt:
+    #     name: zsh
+    #     state: present
+    #     cache_valid_time: 3600
+    #   when: ansible_distribution == "Ubuntu"
 
-- name: Ensure powerlevel10k is present
-  ansible.builtin.git:
-    repo: https://github.com/romkatv/powerlevel10k
-    dest: "{{ omz_custom_theme_path }}/powerlevel10k"
-    version: master
-    force: true
+    # # - name: Ensure zsh as default shell
+    # #   become: true
+    # #   ansible.builtin.shell: |
+    # #     chsh -s $(which zsh)
+    # #   register: ret
+    # #   changed_when: ret.rc != 0
 
-- name: Ensure powerlevel10k is enabled
-  ansible.builtin.lineinfile:
-    path: '{{ zshrc_fullpath }}'
-    state: present
-    regexp: '^ZSH_THEME='
-    line: 'ZSH_THEME="powerlevel10k/powerlevel10k"'
+    # - name: Ensure zsh is default shell
+    #   become: true
+    #   ansible.builtin.user:
+    #     name: '{{ username }}'
+    #     shell: /bin/zsh
+
+    - name: Main | check required fonts are present
+      ansible.builtin.include_tasks:
+        nerdfonts.ansible.yml
+
+    - name: Main | check oh-my-zsh is present
+      ansible.builtin.file:
+        state: file
+        path: '{{ omz_path }}/oh-my-zsh.sh'
+      register: installed
+      failed_when: false
+      changed_when: installed.state == "absent"
+
+    - name: Install oh-my-zsh
+      tags:
+        - basic
+        - zsh
+      include_tasks: oh-my-zsh-install.yml
+      when: installed.state == "absent"
+
+    - name: Ensure oh-my-zsh plugins are present
+      tags:
+        - basic
+        - zsh-plugins
+      block:
+        - name: Ensure plugins are present
+          ansible.builtin.git:
+            repo: https://github.com/zsh-users/{{ item }}
+            dest: "{{ omz_custom_plugin_path }}/{{ item }}"
+            version: master
+            force: true
+            update: true
+          with_items: "{{ zsh_plugins }}"
+
+    - name: Slick_Shell Main | Ensure ZSH Themes are present
+      tags:
+        - basic
+        - zsh-themes
+      block:
+        - name: Ensure powerlevel10k is present
+          ansible.builtin.git:
+            repo: https://github.com/romkatv/powerlevel10k
+            dest: "{{ omz_custom_theme_path }}/powerlevel10k"
+            version: master
+            force: true
+
+        - name: Ensure powerlevel10k is enabled
+          ansible.builtin.lineinfile:
+            path: '{{ zshrc_fullpath }}'
+            state: present
+            regexp: '^ZSH_THEME='
+            line: 'ZSH_THEME="powerlevel10k/powerlevel10k"'
 
 ...

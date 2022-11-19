@@ -1,6 +1,9 @@
 ---
 
-- name: Main | ensure oh-my-zsh
+- name: Oh-My-ZSH Install Main | Ensure oh-my-zsh
+  tags:
+    - basic
+    - zsh
   ansible.builtin.include_role:
     name: gantsign.oh-my-zsh
   vars:
@@ -30,3 +33,4 @@
 #   ansible.builtin.file:
 #     path: '{{ user_path }}/ohmyzsh.sh'
 #     state: absent
+...

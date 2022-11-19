@@ -1,28 +1,25 @@
 ---
-- name: Bootstrap |
+- name: Bootstrap
   become: true
+  tags: basic
   block:
     - name: Bootstrap | make sure OS is updated
-      tags: always
       ansible.builtin.apt:
         update_cache: true
         cache_valid_time: 3600
       when: ansible_distribution == "Ubuntu"
 
     - name: Bootstrap | make sure ansible user is present
-      tags: always
       ansible.builtin.user:
         name: ansible
         groups: root
 
     - name: Bootstrap | make sure ssh key is present in the machine for the user ansible
-      tags: always
       ansible.builtin.authorized_key:
         user: ansible
         key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWnKkok7MjWFeJ4eCcxhaH9STAk8qiH/9d1q1iyNBRW ansible default"
 
     - name: Bootstrap | make sure the user can run commands with no password
-      tags: always
       ansible.builtin.copy:
         src: ../files/sudoer_ansible
         dest: /etc/sudoers.d/ansible
@@ -31,7 +28,6 @@
         mode: 0440
 
     - name: Bootstrap | Ensure sudo password is not required
-      tags: sudo
     # NOTE: Fully quoted because of the ': ' on the line. See the Gotchas in the YAML docs.
       ansible.builtin.lineinfile:
         path: /etc/sudoers
@@ -46,3 +42,4 @@
         line: '#includedir /etc/sudoers.d'
         state: present
         validate: '/usr/sbin/visudo -cf %s'
+...

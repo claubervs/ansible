@@ -10,3 +10,4 @@ linuxbrew_use_installer: true
 
 # Configure shell rc files
 linuxbrew_init_shell: true
+...

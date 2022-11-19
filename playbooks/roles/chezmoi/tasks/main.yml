@@ -1,21 +1,27 @@
-- name: Main | ensure chezmoi is present in the system
-  become: true
-  community.general.snap:
-    name:
-      - chezmoi
-    state: present
-    classic: true
+- name: Chezmoi Main
+  tags:
+    - basic
+    - chezmoi
+  block:
+    - name: Main | Ensure chezmoi is present in the system
+      become: true
+      community.general.snap:
+        name:
+          - chezmoi
+        state: present
+        classic: true
 
-- name: Main | ensure chezmoi repository is present
-  # become: true
-  # changed_when: false
-  ansible.builtin.command:
-    cmd: 'chezmoi init --apply {{ _chezmoi_username }}'
-    # chdir: /home/clauber/
+    - name: Main | Ensure chezmoi repository is present
+      # become: true
+      # changed_when: false
+      ansible.builtin.command:
+        cmd: 'chezmoi init --apply {{ _chezmoi_username }}'
+        chdir: /home/clauber/
 
-- name: Main | ensure chezmoi repository is updated
-  # become: true
-  # changed_when: false
-  ansible.builtin.command:
-    cmd: 'chezmoi update'
-    # chdir: /home/clauber/
+    - name: Main | Ensure chezmoi repository is updated
+      # become: true
+      # changed_when: false
+      ansible.builtin.command:
+        cmd: 'chezmoi update'
+        chdir: /home/clauber/
+...

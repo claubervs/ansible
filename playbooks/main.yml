@@ -7,7 +7,8 @@
 ### PRE TASKS
 ###########################################################################
   - name: Update repo index (Ubuntu)
-    tags: always
+    tags:
+      - basic
     ansible.builtin.apt:
       update_cache: true
       cache_valid_time: 3600
@@ -25,20 +26,29 @@
 ###########################################################################
 - hosts: all
   name: Executing main tasks
-  # become: true
   roles:
     # - sbaerlocher.qemu-guest-agent # DOCS: https://github.com/sbaerlocher/ansible.qemu-guest-agent
-    - base
-    - base_apps
+
+    - role: base
+      tags: basic
+
+    - role: base_apps
+      tags: basic
+
     - role: gantsign.git_user
+      tags: basic
       become: true
       users:
         - username: clauber
           git_user_name: Clauber Santos
           git_user_email: claubervs@gmail.com
           git_user_force: true
-    - slick_shell
-    - chezmoi
+
+    - role: slick_shell
+      tags: basic
+
+    - role: chezmoi
+      tags: basic
 
 
 ###########################################################################

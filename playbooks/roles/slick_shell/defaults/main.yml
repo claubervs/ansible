@@ -27,3 +27,4 @@ zsh_user: clauber
 
 system_user_name: "{{ username }}"
 system_user_group: "{{ username }}"
+...
