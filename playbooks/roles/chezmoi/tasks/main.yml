@@ -1,3 +1,4 @@
+---
 - name: Chezmoi Main
   tags:
     - basic
@@ -13,14 +14,16 @@
 
     - name: Main | Ensure chezmoi repository is present
       # become: true
-      # changed_when: false
+      register: cz_present
+      changed_when: cz_present.rc == 0
       ansible.builtin.command:
         cmd: 'chezmoi init --apply {{ _chezmoi_username }}'
         chdir: /home/clauber/
 
     - name: Main | Ensure chezmoi repository is updated
       # become: true
-      # changed_when: false
+      register: cz_updated
+      changed_when: cz_updated.rc == 0
       ansible.builtin.command:
         cmd: 'chezmoi update'
         chdir: /home/clauber/
