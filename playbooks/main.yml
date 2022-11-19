@@ -110,3 +110,4 @@
       when: p.stat.exists
 
 # TODO: Include the upgrade process to update all installed tools to the latest version.
+...
