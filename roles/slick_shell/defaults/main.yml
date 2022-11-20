@@ -18,8 +18,12 @@ zsh_included_plugins:
   - git
 
 zsh_plugins:
-  - zsh-autosuggestions
-  - zsh-syntax-highlighting
+  - name: "zsh-autosuggestions"
+    repo: "https://github.com/zsh-users/zsh-autosuggestions"
+  - name: "zsh-syntax-highlighting"
+    repo: "https://github.com/zsh-users/zsh-syntax-highlighting"
+  - name: "fzf-tab"
+    repo: "https://github.com/Aloxaf/fzf-tab"
 
 zsh_themes:
   - name: "powerlevel10k"

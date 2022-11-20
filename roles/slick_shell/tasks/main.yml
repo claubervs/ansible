@@ -50,12 +50,12 @@
       block:
         - name: Ensure plugins are present
           ansible.builtin.git:
-            repo: https://github.com/zsh-users/{{ item }}
-            dest: "{{ omz_custom_plugin_path }}/{{ item }}"
+            repo: "{{ item.repo }}"
+            dest: "{{ omz_custom_plugin_path }}/{{ item.name }}"
             version: master
             force: true
             update: true
-          with_items: "{{ zsh_plugins }}"
+          loop: "{{ zsh_plugins }}"
 
     - name: Slick_Shell Main | Ensure ZSH Themes are present
       tags:
