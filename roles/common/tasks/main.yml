@@ -1,21 +1,17 @@
 ---
 - name: Main
-  tags:
-    - basic
   block:
     - name: Main | bootstrapping
+      tags:
+        - ssh-setup
       include_tasks: bootstrap.yml
       # TODO: include a when clause, bootstrapping should run if there is no ssh keypair for the user or no ansible user present.
 
     - name: Main | make sure ssh key is present in the machine for the user ansible
       authorized_key:
         user: ansible
-        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWnKkok7MjWFeJ4eCcxhaH9STAk8qiH/9d1q1iyNBRW ansible default"
+        key: "{{ _bootstrap_publickey }}"
       become: true
-
-    # - name: Print all available facts
-    #   ansible.builtin.debug:
-    #     var: ansible_facts
 
     - name: Main | ensure qemu guest agent when on proxmox
       tags: guestagent

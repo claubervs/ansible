@@ -29,10 +29,10 @@
   roles:
     # - sbaerlocher.qemu-guest-agent # DOCS: https://github.com/sbaerlocher/ansible.qemu-guest-agent
 
-    - role: base
+    - role: common
       tags: basic
 
-    - role: base_apps
+    - role: common_apps
       tags: basic
 
     - role: gantsign.git_user

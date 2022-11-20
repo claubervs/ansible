@@ -1,7 +1,8 @@
 ---
 - name: Bootstrap
   become: true
-  tags: basic
+  tags:
+    - ssh-setup
   block:
     - name: Bootstrap | make sure OS is updated
       ansible.builtin.apt:
@@ -17,8 +18,7 @@
     - name: Bootstrap | make sure ssh key is present in the machine for the user ansible
       ansible.builtin.authorized_key:
         user: ansible
-        key: |
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWnKkok7MjWFeJ4eCcxhaH9STAk8qiH/9d1q1iyNBRW ansible default"
+        key: "{{ _bootstrap_publickey }}"
 
     - name: Bootstrap | make sure the user can run commands with no password
       ansible.builtin.copy:
