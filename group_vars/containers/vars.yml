@@ -1,0 +1,10 @@
+---
+
+_kube_box_ip: "{{ _vault_kube_box_ip }}"
+_ansible_ssh_user: "{{ _vault_ansible_ssh_user }}"
+_ansible_ssh_pass: "{{ _vault_ansible_ssh_pass }}"
+_ansible_ssh_pkey_file: "{{ _vault_ansible_ssh_pkey_file }}"
+_ansible_user: "{{ _vault_ansible_user }}"
+_ansible_pass: "{{ _vault_ansible_pass }}"
+
+...

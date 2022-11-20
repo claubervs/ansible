@@ -17,18 +17,20 @@
     - name: Bootstrap | make sure ssh key is present in the machine for the user ansible
       ansible.builtin.authorized_key:
         user: ansible
-        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWnKkok7MjWFeJ4eCcxhaH9STAk8qiH/9d1q1iyNBRW ansible default"
+        key: |
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWnKkok7MjWFeJ4eCcxhaH9STAk8qiH/9d1q1iyNBRW ansible default"
 
     - name: Bootstrap | make sure the user can run commands with no password
       ansible.builtin.copy:
-        src: ../files/sudoer_ansible
+        src: sudoer_ansible
+        # src: ../files/sudoer_ansible
         dest: /etc/sudoers.d/ansible
         owner: root
         group: root
         mode: 0440
 
     - name: Bootstrap | Ensure sudo password is not required
-    # NOTE: Fully quoted because of the ': ' on the line. See the Gotchas in the YAML docs.
+      # NOTE: Fully quoted because of the ': ' on the line. See the Gotchas in the YAML docs.
       ansible.builtin.lineinfile:
         path: /etc/sudoers
         state: present

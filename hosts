@@ -1,0 +1,20 @@
+[containers]
+kbox ansible_host="{{ _kube_box_ip }}"
+
+[ubuntu]
+# 10.10.10.106
+# 10.10.10.110 ansible_user=clauber ansible_ssh_user=clauber ansible_ssh_private_key_file=~/.ssh/id_ed25519_ansible
+# jammy-test ansible_host=10.10.10.110 ansible_ssh_user=clauber 
+# localhost ansible_connection=local
+
+[ubuntu:vars]
+ansible_ssh_user=ansible
+ansible_ssh_private_key_file=~/.ssh/id_ed25519_ansible
+
+
+[containers:vars]
+ansible_ssh_user="{{ _ansible_ssh_user }}"
+ansible_ssh_pass="{{ _ansible_ssh_pass }}"
+ansible_ssh_private_key_file="{{ _ansible_ssh_pkey_file }}"
+ansible_user="{{ _ansible_user }}"
+ansible_pass="{{ _ansible_pass }}"
