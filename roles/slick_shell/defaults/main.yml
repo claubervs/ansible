@@ -21,7 +21,11 @@ zsh_plugins:
   - zsh-autosuggestions
   - zsh-syntax-highlighting
 
-zsh_theme: powerlevel10k
+zsh_themes:
+  - name: "powerlevel10k"
+    repo: "https://github.com/romkatv/powerlevel10k"
+
+enabled_zsh_theme: "powerlevel10k/powerlevel10k"
 
 zsh_user: clauber
 

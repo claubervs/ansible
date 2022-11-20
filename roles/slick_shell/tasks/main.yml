@@ -62,18 +62,20 @@
         - basic
         - zsh-themes
       block:
-        - name: Ensure powerlevel10k is present
+        - name: Ensure themes are present
           ansible.builtin.git:
-            repo: https://github.com/romkatv/powerlevel10k
-            dest: "{{ omz_custom_theme_path }}/powerlevel10k"
+            repo: "{{ item.repo }}"
+            dest: "{{ omz_custom_theme_path }}/{{ item.name }}"
             version: master
             force: true
+            update: true
+          loop: "{{ zsh_themes }}"
 
-        - name: Ensure powerlevel10k is enabled
-          ansible.builtin.lineinfile:
-            path: '{{ zshrc_fullpath }}'
-            state: present
-            regexp: '^ZSH_THEME='
-            line: 'ZSH_THEME="powerlevel10k/powerlevel10k"'
+    - name: Ensure powerlevel10k is enabled
+      ansible.builtin.lineinfile:
+        path: '{{ zshrc_fullpath }}'
+        state: present
+        regexp: '^ZSH_THEME='
+        line: 'ZSH_THEME="{{ enabled_zsh_theme }}"'
 
 ...
