@@ -1,0 +1,11 @@
+---
+- name: Main | wayofdev.dotfiles
+  hosts: all
+  environment:
+    - PATH: "/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
+  vars:
+    - dotfiles_repository_url: "https://github.com/claubervs/ansible.git"
+    - dotfiles_repository_branch: main
+  roles:
+    - wayofdev.dotfiles
+...

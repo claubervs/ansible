@@ -14,9 +14,6 @@ omz_plugin_path: '{{ omz_path }}/plugins'
 omz_custom_plugin_path: '{{ omz_path }}/custom/plugins'
 omz_custom_theme_path: '{{ omz_path }}/custom/themes'
 
-zsh_included_plugins:
-  - git
-
 zsh_plugins:
   - name: "zsh-autosuggestions"
     repo: "https://github.com/zsh-users/zsh-autosuggestions"
@@ -31,7 +28,12 @@ zsh_themes:
 
 enabled_zsh_theme: "powerlevel10k/powerlevel10k"
 
+# start gantsign.oh-my-zsh role variables
 zsh_user: clauber
+zsh_theme: "{{ enabled_zsh_theme }}"
+zsh_included_plugins:
+  - git
+# end gantsign.oh-my-zsh role variables
 
 system_user_name: "{{ username }}"
 system_user_group: "{{ username }}"

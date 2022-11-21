@@ -1,0 +1,13 @@
+---
+
+- name: Check if Homebrew is already installed
+  ansible.builtin.stat:
+    path: /usr/local/bin/brew
+  register: b
+
+- name: Install Homebrew
+  become_user: linuxbrew
+  ansible.builtin.shell: 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+  when: not b.stat.exists
+
+...

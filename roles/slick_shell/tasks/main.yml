@@ -71,7 +71,7 @@
             update: true
           loop: "{{ zsh_themes }}"
 
-    - name: Ensure powerlevel10k is enabled
+    - name: Ensure chosen theme is enabled
       ansible.builtin.lineinfile:
         path: '{{ zshrc_fullpath }}'
         state: present
