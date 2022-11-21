@@ -1,0 +1,6 @@
+---
+_ansible_ssh_user: "{{ _vault_ansible_ssh_user }}"
+_ansible_ssh_pass: "{{ _vault_ansible_ssh_pass }}"
+_ansible_become_pass: "{{ _vault_ansible_become_pass }}"
+_bootstrap_publickey: "{{ _vault_bootstrap_publickey }}"
+...

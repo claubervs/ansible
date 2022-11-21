@@ -10,6 +10,7 @@
         cache_valid_time: 21600
       when: ansible_distribution == "Ubuntu"
       become: true
+      ignore_errors: true
       loop: '{{ required_software | flatten(1) }}'
 
 - name: Main | Ensuring basic software is present
@@ -22,5 +23,6 @@
         cache_valid_time: 21600
       when: ansible_distribution == "Ubuntu"
       become: true
+      ignore_errors: true
       loop: '{{ basic_software | flatten(1) }}'
 ...
