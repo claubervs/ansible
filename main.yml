@@ -51,24 +51,42 @@
 
 # Oasis_roles documentation: https://github.com/oasis-roles/ansible_collection_system/tree/main/roles
     - role: oasis_roles.system.sudoers
+      tags:
+        - all
+        - basic
+        - common
       vars:
         sudoers_groups_no_password: "{{ _sudoers_group_no_password }}"
         sudoers_no_password: "{{ _sudoers_no_password }}"
 
     - role: common
-      tags: basic
+      tags:
+        - all
+        - basic
+        - common
 
     - role: common_apps
-      tags: basic
+      tags:
+        - all
+        - common
 
     - role: oasis_roles.system.hostname
+      tags:
+        - all
+        - basic
+        - common
+        - change-hostname
       vars:
         hostname: "{{ _hostname }}"
         hostname_aliases:
           - "{{ _hostname }}"
 
     - role: gantsign.git_user
-      tags: basic
+      tags:
+        - all
+        - basic
+        - common
+        - add-gituser
       become: true
       users:
         - username: clauber
@@ -77,12 +95,26 @@
           git_user_force: true
 
     - role: slick_shell
-      tags: basic
+      tags:
+        - all
+        - common
+        - provision-slick-shell
 
     - role: chezmoi
-      tags: basic
+      tags:
+        - all
+        - common
+        - provision-chezmoi
     
     - role: brew
+      tags:
+        - all
+        - provision-homebrew
+
+    - role: docker
+      tags:
+        - all
+        - provision-docker
 
 
 ###########################################################################

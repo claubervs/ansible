@@ -1,6 +1,7 @@
 ---
 
 _hostname: "kbox"
+_docker_user: clauber
 
 required_software:
   - curl

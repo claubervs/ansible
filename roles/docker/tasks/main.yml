@@ -1,0 +1,7 @@
+---
+
+- name: ensure docker is present
+  ansible.builtin.include_role:
+    name: igor_nikiforov.docker
+
+...
