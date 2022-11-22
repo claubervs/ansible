@@ -8,7 +8,6 @@
 - name: Install Homebrew
   become_user: linuxbrew
   ansible.builtin.shell: |
-    set -o pipefail
     yes "\n" | NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   when: not b.stat.exists
 
