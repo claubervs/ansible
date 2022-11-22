@@ -13,7 +13,7 @@ roles:
   - gantsign.git_user
   - gantsign.oh-my-zsh
   - ctorgalson.nerdfonts
-  - igor_nikiforov.docker
+  - geerlingguy.docker
 
 collections:
   - community.general
