@@ -116,10 +116,10 @@
         - all
         - provision-docker
 
-    - role: rancher
-      tags:
-        - all
-        - provision-rancher
+    # - role: rancher
+    #   tags:
+    #     - all
+    #     - provision-rancher
 
 ###########################################################################
 ### POST TASKS

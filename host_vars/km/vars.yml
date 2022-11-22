@@ -1,6 +1,6 @@
 ---
 
-_hostname: "kbox"
+_hostname: "km"
 _docker_users:
   - clauber
 
