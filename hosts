@@ -1,5 +1,6 @@
 [containers]
-kbox ansible_host="10.10.10.80" ansible_ssh_private_key_file="~/.ssh/id_ed25519_clauber"
+km ansible_host="10.10.10.80"
+kw1 ansible_host="10.10.10.81"
 # jammy-test ansible_host=10.10.10.80 ansible_ssh_user=clauber
 
 [localservers]
@@ -26,6 +27,7 @@ ansible_ssh_pass="{{ _ansible_ssh_pass }}"
 # ansible_user="{{ _ansible_user }}"
 # ansible_pass="{{ _ansible_pass }}"
 ansible_become_pass="{{ _ansible_become_pass }}"
+ansible_ssh_private_key_file="~/.ssh/id_ed25519_clauber"
 
 [testservers:vars]
 ansible_ssh_user="{{ _ansible_ssh_user }}"
