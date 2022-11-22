@@ -6,14 +6,34 @@
 ###########################################################################
 ### PRE TASKS
 ###########################################################################
-  - name: Update repo index (Ubuntu)
+  - name: Update repo index
     tags:
       - basic
     ansible.builtin.apt:
       update_cache: true
       cache_valid_time: 3600
+      upgrade: full
     changed_when: false
     when: ansible_distribution == "Ubuntu"
+  
+  - name: Reboot if necessary
+    ansible.builtin.include_role:
+      name: arillso.system.reboot
+    vars:
+      reboot_post_reboot_delay: 60
+  
+  # - name: Configure Connection
+  #   community.general.nmcli:
+  #     conn_name: ens18
+  #     ifname: ens18
+  #     ip4:
+  #       - 10.10.10.80/24
+  #     gw4: 10.10.10.1
+  #     autoconnect: true
+  #     dns4:
+  #       - 10.10.10.1
+  #     type: ethernet
+  #     state: present
 
   # - name: make sure that ansible requirements are present
   #   tags: always
@@ -25,17 +45,27 @@
 ### MAIN TASKS
 ###########################################################################
 - hosts: all
-  name: Executing main tasks
+  name: Main |
   roles:
     # - sbaerlocher.qemu-guest-agent # DOCS: https://github.com/sbaerlocher/ansible.qemu-guest-agent
 
-    # - role: brew
+# Oasis_roles documentation: https://github.com/oasis-roles/ansible_collection_system/tree/main/roles
+    - role: oasis_roles.system.sudoers
+      vars:
+        sudoers_groups_no_password: "{{ _sudoers_group_no_password }}"
+        sudoers_no_password: "{{ _sudoers_no_password }}"
 
     - role: common
       tags: basic
 
     - role: common_apps
       tags: basic
+
+    - role: oasis_roles.system.hostname
+      vars:
+        hostname: "{{ _hostname }}"
+        hostname_aliases:
+          - "{{ _hostname }}"
 
     - role: gantsign.git_user
       tags: basic
@@ -51,6 +81,9 @@
 
     - role: chezmoi
       tags: basic
+    
+    - role: brew
+
 
 ###########################################################################
 ### POST TASKS
@@ -58,18 +91,23 @@
 - hosts: all
   name: Post Tasks | Executing post_tasks
   post_tasks:
-    - name: Post Tasks | Check that the reboot-required exists
-      ansible.builtin.stat:
-        path: /var/run/reboot-required
-      register: p
-    - name: Post Tasks | Debug
-      ansible.builtin.debug:
-        msg: "Reboot required"
-      when: p.stat.exists
-    - name: Post Tasks | Reboot
-      ansible.builtin.reboot:
+    # - name: Post Tasks | Check that the reboot-required exists
+    #   ansible.builtin.stat:
+    #     path: /var/run/reboot-required
+    #   register: p
+    # - name: Post Tasks | Debug
+    #   ansible.builtin.debug:
+    #     msg: "Reboot required"
+    #   when: p.stat.exists
+    # - name: Post Tasks | Reboot
+    #   ansible.builtin.reboot:
         # msg: Rebooting
       # when: p.stat.exists
+  - name: Reboot if necessary
+    ansible.builtin.include_role:
+      name: arillso.system.reboot
+    vars:
+      reboot_post_reboot_delay: 60
 
 # TODO: Include the upgrade process to update all installed tools to the latest version.
 ...

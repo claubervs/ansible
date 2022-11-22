@@ -7,7 +7,19 @@
 
 - name: Install Homebrew
   become_user: linuxbrew
-  ansible.builtin.shell: 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+  ansible.builtin.shell: 'yes "\n" | NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
   when: not b.stat.exists
+
+- name: Install homebrew taps
+  ansible.builtin.homebrew_tap:
+    name: "{{ _homebrew_taps }}"
+    state: present
+  loop: "{{ _homebrew_taps }}"
+
+- name: Install homebrew formulaes
+  ansible.builtin.homebrew:
+    name: "{{ _homebrew_formulaes }}"
+    state: present
+  loop: "{{ _homebrew_formulaes }}"
 
 ...

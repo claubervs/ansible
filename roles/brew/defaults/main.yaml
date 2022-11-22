@@ -1,0 +1,19 @@
+---
+
+_homebrew_taps:
+  - jesseduffield/lazygit
+  - jesseduffield/lazydocker
+
+_homebrew_formulaes:
+  - fzf
+  - lazygit
+  - lazydocker
+  - navi
+  - tldr
+  - rsync
+  - rclone
+  - sops
+  - age
+  - zellij
+
+...
