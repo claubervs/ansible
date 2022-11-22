@@ -2,6 +2,10 @@
 
 - name: ensure docker is present
   ansible.builtin.include_role:
-    name: igor_nikiforov.docker
+    name: geerlingguy.docker
+  vars:
+    ansible_become: true
+    docker_users: "{{ _docker_users }}"
+    docker_install_compose_plugin: true
 
 ...
