@@ -14,6 +14,8 @@ roles:
   - gantsign.oh-my-zsh
   - ctorgalson.nerdfonts
   - geerlingguy.docker
+  - geerlingguy.kubernetes
+  - geerlingguy.helm
 
 collections:
   - community.general

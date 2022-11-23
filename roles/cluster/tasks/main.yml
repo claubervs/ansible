@@ -4,10 +4,24 @@
   ansible.builtin.include_role:
     name: geerlingguy.kubernetes
   vars:
+    ansible_become: true
     kubernetes_packages: "{{ _kubernetes_packages }}"
     kubernetes_role: "{{ _kubernetes_role }}"
+  when: _kubernetes_install
 
 # https://www.cloudsigma.com/how-to-install-and-use-kubernetes-on-ubuntu-20-04/
 # https://phoenixnap.com/kb/install-kubernetes-on-ubuntu
+
+- name: ensure helm is present
+  ansible.builtin.include_role:
+    name: geerlingguy.helm
+  vars:
+    helm_version: 'v3.10.0'
+  when: _helm_install
+
+- name: ensure rancher is present
+  ansible.builtin.include_role:
+    name: rancher
+  when: _rancher_install
 
 ...

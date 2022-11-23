@@ -116,10 +116,14 @@
         - all
         - provision-docker
 
-    # - role: rancher
+    # - role: cluster
     #   tags:
     #     - all
-    #     - provision-rancher
+    #     - provision-cluster
+    #   vars:
+    #     _kubernetes_install: true
+    #     _helm_install: false
+    #     _rancher_install: false
 
 ###########################################################################
 ### POST TASKS
