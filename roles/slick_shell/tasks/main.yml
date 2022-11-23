@@ -48,7 +48,7 @@
         - basic
         - zsh-plugins
       block:
-        - name: Ensure plugins are present
+        - name: Ensure plugins are present # noqa:loop-var-prefix
           ansible.builtin.git:
             repo: "{{ item.repo }}"
             dest: "{{ omz_custom_plugin_path }}/{{ item.name }}"
@@ -62,7 +62,7 @@
         - basic
         - zsh-themes
       block:
-        - name: Ensure themes are present
+        - name: Ensure themes are present # noqa:loop-var-prefix
           ansible.builtin.git:
             repo: "{{ item.repo }}"
             dest: "{{ omz_custom_theme_path }}/{{ item.name }}"

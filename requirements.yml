@@ -5,11 +5,11 @@
 # To install these roles please run the command below:
 # ansible-galaxy install -r ./playbooks/requirements.yml
 roles:
-  - wayofdev.dotfiles
+  # - wayofdev.dotfiles
   # - wayofdev.homebrew
-  - markosamuli.linuxbrew
-  - geerlingguy.git
-  - sbaerlocher.qemu-guest-agent
+  # - markosamuli.linuxbrew
+  # - geerlingguy.git
+  # - sbaerlocher.qemu-guest-agent
   - gantsign.git_user
   - gantsign.oh-my-zsh
   - ctorgalson.nerdfonts
@@ -20,6 +20,6 @@ roles:
 collections:
   - community.general
   # - scruffaluff.bootware
-  - arillso.system
-  - oasis_roles.system
+  # - arillso.system
+  # - oasis_roles.system
 ...

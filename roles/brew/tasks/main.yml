@@ -5,7 +5,7 @@
     path: /usr/local/bin/brew
   register: b
 
-- name: Install Homebrew
+- name: Install Homebrew # noqa:risky-shell-pipe
   become_user: linuxbrew
   ansible.builtin.shell: |
     yes "\n" | NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

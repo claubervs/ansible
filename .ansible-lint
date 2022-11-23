@@ -40,6 +40,9 @@ use_default_rules: true
 # Ansible-lint completely ignores rules or tags listed below
 skip_list:
   - name
+  - schema
+  - loop-var-prefix
+  - ignore-errors
 
 # Ansible-lint does not automatically load rules that have the 'opt-in' tag.
 # You must enable opt-in rules by listing each rule 'id' below.

@@ -2,7 +2,7 @@
 - name: Main | ensuring required software is present
   tags: basic
   block:
-    - name: Main | Ensure required software is present
+    - name: Main | Ensure required software is present # noqa:ignore-errors
       ansible.builtin.apt:
         name: '{{ item }}'
         state: present
@@ -16,7 +16,7 @@
 - name: Main | Ensuring basic software is present
   tags: basic
   block:
-    - name: Main | ensure basic software is present
+    - name: Main | ensure basic software is present # noqa:ignore-errors
       ansible.builtin.apt:
         name: '{{ item }}'
         state: present
