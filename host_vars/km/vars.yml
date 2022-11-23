@@ -1,8 +1,6 @@
 ---
 
 _hostname: "km"
-_docker_users:
-  - clauber
 
 required_software:
   - curl
@@ -39,5 +37,10 @@ _homebrew_formulaes:
   - sops
   - age
   - zellij
+
+_docker_users:
+  - clauber
+
+_kubernetes_role: master
 
 ...

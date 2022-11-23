@@ -1,5 +1,13 @@
 ---
+# https://galaxy.ansible.com/geerlingguy/kubernetes
+- name: ensure kubernetes is present
+  ansible.builtin.include_role:
+    name: geerlingguy.kubernetes
+  vars:
+    kubernetes_packages: "{{ _kubernetes_packages }}"
+    kubernetes_role: "{{ _kubernetes_role }}"
 
-
+# https://www.cloudsigma.com/how-to-install-and-use-kubernetes-on-ubuntu-20-04/
+# https://phoenixnap.com/kb/install-kubernetes-on-ubuntu
 
 ...

@@ -12,4 +12,11 @@ _sudoers_group_no_password:
 _sudoers_no_password:
   - clauber
   - ansible
+
+_kubernetes_packages:
+  - kubelet
+  - kubectl
+  - kubeadm
+  - kubernetes-cni
+
 ...
