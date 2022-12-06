@@ -111,6 +111,11 @@
         - all
         - provision-homebrew
 
+    - role: mount
+      tags:
+        - all
+        - mount
+
     - role: docker
       tags:
         - all

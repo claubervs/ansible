@@ -1,0 +1,34 @@
+---
+
+- name: ensure credential file is present
+  ansible.builtin.template:
+    backup: true
+    src: smbcreds
+    dest: /home/.smbcreds
+    owner: root
+    group: root
+    mode: '0400'
+
+# - name: ensure mount folder is present
+#   ansible.builtin.file:
+#     path: "{{ _mount_folder }}"
+#     owner: root
+#     group: root
+#     mode: '0777'
+#     state: directory
+
+# - name: ensure mount folder is empty
+#   ansible.builtin.file:
+#     path: "{{ _mount_folder }}/"
+#     recurse: true
+#     state: absent
+
+- name: ensure shared drives are present
+  ansible.posix.mount:
+    backup: true
+    fstype: cifs
+    path: /mnt/persist
+    src: 10.10.10.31/persist
+    opts: iocharset=utf8,credentials=/home/.smbcreds,uid=1000,rw,exec,_netdev
+
+...
