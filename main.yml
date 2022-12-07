@@ -6,6 +6,28 @@
 ###########################################################################
 ### PRE TASKS
 ###########################################################################
+  - name: import role netplan configuration
+    ansible.builtin.import_role:
+      name: mrlesmithjr.system.netplan
+    vars:
+      ansible_become: true
+      netplan_enabled: true
+      netplan_config_file: /etc/netplan/00-installer-config.yaml
+      netplan_configuration:
+        network:
+          version: 2
+          ethernets:
+            ens18:
+              dhcp4: true
+  
+  - name: Flush Handlers
+    ansible.builtin.meta: flush_handlers
+
+  - name: Apply netplan configuration
+    become: true
+    ansible.builtin.command:
+      cmd: 'netplan apply'
+
   - name: Update repo index
     tags:
       - basic
@@ -20,7 +42,7 @@
     ansible.builtin.include_role:
       name: arillso.system.reboot
     vars:
-      reboot_post_reboot_delay: 60
+      reboot_post_reboot_delay: 90
   
   # - name: Configure Connection
   #   community.general.nmcli:
@@ -112,9 +134,14 @@
         - provision-homebrew
 
     - role: mount
+      become: true
       tags:
         - all
         - mount
+      vars:
+        _smb_creds_username: "clauber"
+        _smb_creds_password: ""
+        _smb_creds_domain: "lan.claubersantos.com"
 
     - role: docker
       tags:

@@ -3,7 +3,7 @@
 - name: ensure credential file is present
   ansible.builtin.template:
     backup: true
-    src: smbcreds
+    src: smbcreds.j2
     dest: /home/.smbcreds
     owner: root
     group: root
@@ -28,7 +28,12 @@
     backup: true
     fstype: cifs
     path: /mnt/persist
-    src: 10.10.10.31/persist
+    src: //10.10.10.31/persist
     opts: iocharset=utf8,credentials=/home/.smbcreds,uid=1000,rw,exec,_netdev
+    state: "{{ _mount_state }}"
+
+# - name: ensure share is mounted
+#   ansible.builtin.command:
+#     cmd: "mount -a /etc/fstab"
 
 ...

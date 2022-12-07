@@ -8,6 +8,7 @@ required_software:
   - gcc
   # - network-manager
   - python3-pip
+  - cifs-utils
 
 basic_software:
   - ncdu

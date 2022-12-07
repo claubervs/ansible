@@ -8,6 +8,7 @@ required_software:
   - gcc
   # - network-manager
   - python3-pip
+  - cifs-utils
 
 basic_software:
   - ncdu
@@ -15,7 +16,7 @@ basic_software:
   - micro
   # - btop
   - mc
-  # - bat
+  - bat
   # - neofetch
   - exa
   # - zoxide

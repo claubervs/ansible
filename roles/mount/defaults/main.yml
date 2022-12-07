@@ -1,7 +1,4 @@
 ---
-
-_smb_creds_username: "{{ _vault_smb_creds_username }}"
-_smb_creds_password: "{{ _vault_smb_creds_password }}"
-_smb_creds_domain: "{{ _vault_smb_creds_domain }}"
 _mount_folder: "/mnt/persist"
+_mount_state: "mounted"
 ...
