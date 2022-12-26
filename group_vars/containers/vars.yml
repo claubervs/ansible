@@ -12,6 +12,7 @@ _sudoers_group_no_password:
 _sudoers_no_password:
   - clauber
   - ansible
+  - docker
 
 _kubernetes_packages:
   - kubelet

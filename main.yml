@@ -131,6 +131,7 @@
     - role: brew
       tags:
         - all
+        - common
         - provision-homebrew
 
     - role: mount
