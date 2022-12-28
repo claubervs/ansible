@@ -3,6 +3,7 @@ km ansible_host="10.10.10.80"
 kw1 ansible_host="10.10.10.81"
 # jammy-test ansible_host=10.10.10.80 ansible_ssh_user=clauber
 docker ansible_host="10.10.10.90"
+freeipa ansible_host="10.10.10.50"
 
 [localservers]
 # localhost ansible_connection=local

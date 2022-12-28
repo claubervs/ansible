@@ -1,0 +1,47 @@
+---
+
+_hostname: "freeipa"
+
+required_software:
+  - curl
+  - build-essential
+  - gcc
+  # - network-manager
+  - python3-pip
+  - cifs-utils
+
+basic_software:
+  - ncdu
+  - nala
+  - micro
+  - btop
+  - mc
+  - bat
+  - neofetch
+  - exa
+  # - zoxide
+  # - ripgrep
+  # - tmux
+
+_homebrew_taps:
+  - jesseduffield/lazygit
+  - jesseduffield/lazydocker
+
+_homebrew_formulaes:
+  - fzf
+  - lazygit
+  - lazydocker
+  # - navi
+  # - tldr
+  # - rsync
+  # - rclone
+  # - sops
+  # - age
+  # - zellij
+
+_docker_users:
+  - clauber
+
+# _kubernetes_role: master
+
+...
